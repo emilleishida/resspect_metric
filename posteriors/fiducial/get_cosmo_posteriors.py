@@ -173,14 +173,14 @@ transformed parameters{
       // Integral of 1/E(z) 
       DC = integrate_ode_rk45(Ez, E0, z0, z, pars,  x_r, x_i);
       for (i in 1:nobs) {
-            dl[i] = 5 * log10(DH * (1 + z[i]) * DC[i, 1]/10);
+            dl[i] = 25 + 5 * log10(DH * (1 + z[i]) * DC[i, 1]/10);
             mag[i] = Mint + dl[i];
       }
 }
 model{
       // priors and likelihood
       om ~ normal(0.3, 0.1);
-      Mint ~ normal(30, 5); 
+      Mint ~ normal(-19, 5); 
       w ~ normal(-1, 0.2);
 
       mu ~ normal(mag, muerr);
@@ -201,7 +201,7 @@ model = pystan.StanModel(model_code=stan_model)
 fit = model.sampling(data=stan_input, iter=6000, chains=3, warmup=3000)#, control={'max_treedepth':15})
 
 # print summary
-print(fit.stansummary(pars=["om", "w"]))
+print(fit.stansummary(pars=["om", "w", "Mint"]))
 
 samples = fit.extract()
 
@@ -213,5 +213,5 @@ pystan.check_hmc_diagnostics(fit)
 import arviz
 import matplotlib.pyplot as plt
 
-arviz.plot_trace(fit, ['om', 'w'])
+arviz.plot_trace(fit, ['om', 'w', 'Mint'])
 plt.savefig(str(nbins) + 'bins/trace_plot_perfect_classifier_salt2mu_' + str(nbins) + 'bins.png')
