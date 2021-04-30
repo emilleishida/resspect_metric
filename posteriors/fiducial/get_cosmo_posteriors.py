@@ -1,8 +1,18 @@
+case = 'fiducial'
+
 import pandas as pd
 import numpy as np
 import pystan
 import os
+from resspect.salt3_utils import get_distances
 import pickle
+import time
+from shutil import copyfile
+
+
+
+fit_lightcurves = False
+restart_master = True
 
 # number of bins for SALT2mu
 nbins = 70
@@ -10,29 +20,114 @@ nbins = 70
 # rather to re-write fitres file
 replace_z = True
 add_lowz  = True
+bias = True
+
+###########################################################################################
+# translate ids                                         ###################################
+###########################################################################################
+SNANA_types = {90:11, 62:{1:3, 2:13}, 42:{1:2, 2:12, 3:14},
+               67:41, 52:43, 64:51, 95:60, 994:61, 992:62,
+               993:63, 15:64, 88:70, 92:80, 65:81, 16:83,
+               53:84, 991:90, 6:{1:91, 2:93}}
+
+types_names = {90: 'Ia', 67: '91bg', 52:'Iax', 42:'II', 62:'Ibc', 
+               95: 'SLSN', 15:'TDE', 64:'KN', 88:'AGN', 92:'RRL', 65:'M-dwarf',
+               16:'EB',53:'Mira', 6:'MicroL', 991:'MicroLB', 992:'ILOT', 
+               993:'CART', 994:'PISN',995:'MLString'}
+
+
+# read plasticc test metadata
+test_zenodo_meta = '/media/RESSPECT/data/PLAsTiCC/PLAsTiCC_zenodo/plasticc_test_metadata.csv'
+test_metadata = pd.read_csv(test_zenodo_meta)
+
+# read sample for this case
+fname = '/media/RESSPECT/data/PLAsTiCC/for_metrics/' + case + '_samp.csv'
+data = pd.read_csv(fname)
+
+data_new = {}
+data_new['id'] = data['id'].values
+data_new['redshift'] = data['redshift'].values
+data_new['type'] = [types_names[item] for item in data['code'].values]
+data_new['code'] = []
+data_new['orig_sample'] = ['test' for i in range(data.shape[0])]
+data_new['queryable'] = [True for i in range(data.shape[0])]
+data_new['code_zenodo'] = data['code'].values
+
+for i in range(data.shape[0]):            
+    sncode = data.iloc[i]['code']
+    if  sncode not in [62, 42, 6]:
+        data_new['code'].append(SNANA_types[sncode])
+        if SNANA_types[sncode] == 60:
+            print('sncode = ', sncode, ' new code=', SNANA_types[sncode])
+    else:
+        flag = test_metadata['object_id'].values == data.iloc[i]['id']
+        submodel = test_metadata[flag]['true_submodel'].values[0]
+        data_new['code'].append(SNANA_types[sncode][submodel])
+        
+data_out = pd.DataFrame(data_new)
+data_out.to_csv('results/' + case + '_photoids_plasticc.dat', index=False)
+
+###################################################################################
+###################################################################################
+
+
+res = {}
+
+if fit_lightcurves:
+    
+    start_time = time.time()
+    
+    print('*********  Fitting light curves   ******************')
+
+    fname = 'results/' + case + '_photoids_plasticc.dat'
+    
+    meta = pd.read_csv(fname, index_col=False)
+    codes = np.unique(meta['code'].values)
+
+    res = get_distances(fname,
+                                   data_prefix='LSST_DDF',
+                                   data_folder='/media/RESSPECT/data/PLAsTiCC/SNANA',            
+                                   select_modelnum=None,
+                                   salt2mu_prefix='test_salt2mu_res',
+                                   maxsnnum=50000,
+                                   select_orig_sample=['test'],
+                                   salt3_outfile='salt3pipeinput.txt',
+                                   data_prefix_has_sntype=False,
+                                   master_fitres_name='results/master_fitres.fitres', 
+                                   append_master_fitres=True,
+                                   restart_master_fitres=restart_master)
+    
+    res['distances'].to_csv('results/mu_photoIa_plasticc_' + case + '.dat', index=False)
+    res['cosmopars'].to_csv('results/cosmo_photoIa_plasticc_' + case + '.dat', index=False)
+    
+        
+    print("--- %s seconds ---" % (time.time() - start_time))
+
 
 # SALT2mu input file name
 salt2mu_fname = 'SALT2mu.input'
 
+
 if replace_z:
     if add_lowz:
-        # path to lowz fitres
-        fitres_lowz_fname = '/media/RESSPECT/data/temp_lowz_sim/lowz_only_fittres.fitres'
+        if bias:
+            # path to lowz fitres
+            fitres_lowz_fname = '/media/RESSPECT/data/temp_lowz_sim/lowz_only_fittres.fitres'
         
+        else:
+            raise ValueError('Low-z without bias not implemented yet.')
+            
         fitres_lowz = pd.read_csv(fitres_lowz_fname, index_col=False, comment="#", 
-                              skip_blank_lines=True, delim_whitespace=True)
+                                  skip_blank_lines=True, delim_whitespace=True)
         
         fitres_lowz['zHD'] = fitres_lowz['SIM_ZCMB']
 
     # path to main fitres
-    fitres_main_fname = '/media/emille/git/COIN/RESSPECT_work/PLAsTiCC/perfect_classifier/master_fitres_old.fitres'
+    fitres_main_fname = 'results/master_fitres.fitres'
     
     # read fitres
     fitres_main = pd.read_csv(fitres_main_fname, index_col=False, comment="#", 
                           skip_blank_lines=True, delim_whitespace=True)
-
-    # update redshift value
-    fitres_main['zHD'] = fitres_main['SIM_ZCMB']
 
     if add_lowz:
         # join samples considering only common columns
@@ -40,16 +135,25 @@ if replace_z:
         fitres = pd.concat(frames, ignore_index=True)
     else:
         fitres = fitres_main   
+    
+    # update redshift value
+    fitres['zHD'] = fitres['SIM_ZCMB']
 
     # replace nans with number so SNANA recognizes the columns
     fitres.fillna(value=-99, inplace=True)
 
     # save combined fitres to file
-    fitres.to_csv('master_fitres_new.fitres', sep=" ", index=False)
+    if add_lowz:
+        if bias:
+            fitres.to_csv('results/master_fitres_new_lowz_withbias.fitres', sep=" ", index=False)
+        else:
+            fitres.to_csv('results/master_fitres_new_lowz_nobias.fitres', sep=" ", index=False)
+    else:
+        fitres.to_csv('results/master_fitres_new.fitres', sep=" ", index=False)
     
-
-if not os.path.isdir(str(nbins) + 'bins/'):
-    os.makedirs(str(nbins) + 'bins/')
+samples_dir = '/media/RESSPECT/data/PLAsTiCC/for_metrics/posteriors/' + case + '/'
+if not os.path.isdir(samples_dir):
+    os.makedirs(samples_dir)
 
 # change parameters for SALT2mu
 op = open(salt2mu_fname, 'r')
@@ -57,18 +161,34 @@ lin = op.readlines()
 op.close()
 
 lin[0] = 'bins=' + str(nbins) + '\n'
-lin[-3] = 'prefix=' + str(nbins) + 'bins/test_salt2mu_' + str(nbins) + 'bins\n'
+
+
+if add_lowz:
+    if bias:
+        lin[-3] = 'prefix=results/test_salt2mu_lowz_withbias_' + case + '\n'
+        lin[-4] = 'file=results/master_fitres_new_lowz_withbias.fitres' + '\n'
+        fitres_comb_fname = 'results/test_salt2mu_lowz_withbias_' + case + '.fitres'
+        stan_input_fname = 'results/stan_input_salt2mu_lowz_withbias_' + case + '.csv'
+    else:
+        lin[-3] = 'prefix=results/test_salt2mu_lowz_nobias_' + case + '\n'
+        lin[-4] = 'file=results/master_fitres_new_lowz_nobias.fitres' + '\n'
+        fitres_comb_fname = 'results/test_salt2mu_lowz_nobias_' + case + '.fitres'
+        stan_input_fname = 'results/stan_input_salt2mu_lowz_npbias_' + case + '.csv'
+else:
+    lin[-3] = 'prefix=results/test_salt2mu_' + case + '\n'
+    lin[-4] = 'file=results/master_fitres_new.fitres' + '\n'
+    fitres_comb_fname = 'results/test_salt2mu_' + case + '.fitres'
+    stan_input_fname = 'results/stan_input_salt2mu_' + case + '.csv'
 
 op2 = open(salt2mu_fname, 'w')
 for line in lin:
     op2.write(line)
 op2.close()
-    
+
 # get distances from SALT2MU
 os.system('SALT2mu.exe ' + salt2mu_fname)
 
 # read data for Bayesian model
-fitres_comb_fname = str(nbins) + 'bins/test_salt2mu_' + str(nbins) + 'bins.fitres'
 fitres_comb = pd.read_csv(fitres_comb_fname, index_col=False, comment="#", skip_blank_lines=True, 
                            delim_whitespace=True)
 
@@ -103,7 +223,7 @@ stan_input2['muerr'] = stan_input['muerr']
 
 stan_input_tofile = pd.DataFrame(stan_input2)
 
-stan_input_tofile[['z', 'mu', 'muerr']].to_csv( str(nbins) + 'bins/stan_input_perfect_classifier_salt2mu_' + str(nbins) + 'bins.csv', index=False)
+stan_input_tofile[['z', 'mu', 'muerr']].to_csv(stan_input_fname, index=False)
 
 stan_model="""
 functions {
@@ -155,13 +275,11 @@ transformed data {
 }
 parameters{
       real<lower=0, upper=1> om;    // dark matter energy density
-      real Mint;                    // intrinsic magnitude
       real<lower=-2, upper=0> w;    // dark energy equation of state parameter
 }
 transformed parameters{
       real DC[nobs,1];                        // co-moving distance 
       real pars[2];                           // ODE input = (om, w)
-      vector[nobs] mag;                       // apparent magnitude
       real dl[nobs];                          // luminosity distance
       real DH;                                // Hubble distance = c/H0
  
@@ -174,38 +292,66 @@ transformed parameters{
       DC = integrate_ode_rk45(Ez, E0, z0, z, pars,  x_r, x_i);
       for (i in 1:nobs) {
             dl[i] = 25 + 5 * log10(DH * (1 + z[i]) * DC[i, 1]);
-            mag[i] = Mint + dl[i];
       }
 }
 model{
       // priors and likelihood
       om ~ normal(0.3, 0.1);
-      Mint ~ normal(-19, 5); 
       w ~ normal(-1, 0.2);
 
-      mu ~ normal(mag, muerr);
+      mu ~ normal(dl, muerr);
 }
 generated quantities {
     vector[nobs] log_lik;
     vector[nobs] mu_hat;
     
     for (j in 1:nobs) {
-        log_lik[j] = normal_lpdf(mu[j] | mag[j], muerr[j]);
-        mu_hat[j] = normal_rng(mag[j], muerr[j]);
+        log_lik[j] = normal_lpdf(mu[j] | dl[j], muerr[j]);
+        mu_hat[j] = normal_rng(dl[j], muerr[j]);
     }
 }
 """
 
 model = pystan.StanModel(model_code=stan_model)
 
-fit = model.sampling(data=stan_input, iter=6000, chains=3, warmup=3000)#, control={'max_treedepth':15})
+fit = model.sampling(data=stan_input, iter=16000, chains=3, warmup=10000, control={'adapt_delta':0.99})
 
 # print summary
-print(fit.stansummary(pars=["om", "w", "Mint"]))
+res = fit.stansummary(pars=["om", "w"])
+check = str(pystan.check_hmc_diagnostics(fit))
+print(res)
+print( ' ******* ')
+print(check)
 
-samples = fit.extract()
 
-pickle.dump(samples, open(str(nbins) + 'bins/chains.pkl', "wb"))
+if add_lowz and bias:
+    summ_fname = samples_dir + 'stan_summary_' + case + '_lowz_withbias.dat'
+    summ_fname2 = 'results/stan_summary_' + case + '_lowz_withbias.dat'
+    chains_fname = samples_dir + '/chains_' + case + '_lowz_withbias.pkl'
+    trace_fname = samples_dir + '/trace_plot_' + case + '_lowz_withbias.png'
+    trace_fname2 = 'results/trace_plot_' + case + '_lowz_withbias.png'
+elif add_lowz and not bias:
+    summ_fname = samples_dir + 'stan_summary_' + case + '_lowz_nobias.dat'
+    summ_fname2 = 'results/stan_summary_' + case + '_lowz_nobias.dat'
+    chains_fname = samples_dir + '/chains_' + case + '_lowz_nobias.pkl'
+    trace_fname = samples_dir + '/trace_plot_' + case + '_lowz_nobias.png'
+    trace_fname2 = 'results/trace_plot_' + case + '_lowz_nobias.png'
+else:
+    summ_fname = samples_dir + 'stan_summary_' + case + '.dat'
+    summ_fname2 = 'results/stan_summary_' + case + '.dat'
+    chains_fname = samples_dir + '/chains_' + case + '.pkl'
+    trace_fname = samples_dir + '/trace_plot_' + case + '.png'
+    trace_fname2 = 'results/trace_plot_' + case + '.png'
+
+op2 = open(summ_fname, 'w')
+op2.write(res)
+op2.write('\n ************* \n')
+op2.write(check)
+op2.close()
+
+samples = fit.extract(permuted=True)
+
+pickle.dump(samples, open(chains_fname, "wb"))
 
 pystan.check_hmc_diagnostics(fit)
 
@@ -213,5 +359,8 @@ pystan.check_hmc_diagnostics(fit)
 import arviz
 import matplotlib.pyplot as plt
 
-arviz.plot_trace(fit, ['om', 'w', 'Mint'])
-plt.savefig(str(nbins) + 'bins/trace_plot_perfect_classifier_salt2mu_' + str(nbins) + 'bins.png')
+arviz.plot_trace(fit, ['om', 'w'])
+plt.savefig(trace_fname)
+
+copyfile(trace_fname, trace_fname2)
+copyfile(summ_fname, summ_fname2)
