@@ -1,0 +1,13 @@
+To run all diagnostics call pystan.check_hmc_diagnostics(fit)
+Inference for Stan model: anon_model_38e4f95f653b30df7980c86d16df3f25.
+5 chains, each with iter=10000; warmup=9500; thin=1; 
+post-warmup draws per chain=500, total post-warmup draws=2500.
+
+     mean se_mean     sd   2.5%    25%    50%    75%  97.5%  n_eff   Rhat
+om   0.34  7.9e-4   0.02   0.31   0.33   0.34   0.35   0.37    379   1.01
+w   -1.13  2.6e-3   0.05  -1.24  -1.17  -1.13   -1.1  -1.03    401   1.01
+
+Samples were drawn using NUTS at Mon May 24 23:36:45 2021.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
