@@ -1,0 +1,14 @@
+To run all diagnostics call pystan.check_hmc_diagnostics(fit)
+WARNING:pystan:n_eff / iter below 0.001 indicates that the effective sample size has likely been overestimated
+Inference for Stan model: anon_model_38e4f95f653b30df7980c86d16df3f25.
+5 chains, each with iter=12000; warmup=11000; thin=1; 
+post-warmup draws per chain=1000, total post-warmup draws=5000.
+
+     mean se_mean     sd   2.5%    25%    50%    75%  97.5%  n_eff   Rhat
+om   0.45  5.6e-5 2.7e-3   0.44   0.44   0.45   0.45   0.45   2274    1.0
+w   -1.99  1.9e-4 9.1e-3   -2.0   -2.0  -1.99  -1.99  -1.97   2342    1.0
+
+Samples were drawn using NUTS at Tue May 25 00:20:19 2021.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
