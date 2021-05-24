@@ -4,7 +4,7 @@ import pystan
 
 
 # read Stan input
-fname = 'results/stan_input_salt2mu_lowz_withbias_perfect3000.csv'
+fname = 'stan_input_salt2mu_lowz_withbias_perfect3000.csv'
 fitres_comb = pd.read_csv(fname)
 
 # set initial conditions
