@@ -101,7 +101,7 @@ transformed data {
 }
 parameters{
       real<lower=0, upper=1> om;    // dark matter energy density
-      real<lower=-2, upper=0> w;    // dark energy equation of state parameter
+      real w;    // dark energy equation of state parameter
 }
 transformed parameters{
       real DC[nobs,1];                        // co-moving distance
@@ -135,7 +135,6 @@ fit = model.sample(num_samples=10000,
                    num_chains=5,
                    num_warmup=9500,
                    delta=0.99)
-                   #control={'adapt_delta':0.99})
 
 df = fit.to_frame()
 print(df.describe().T)
