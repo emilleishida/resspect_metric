@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 
 SALT2_fit/*
+posteriors/WFD/*
+posteriores/DDF/*
