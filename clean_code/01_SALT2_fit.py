@@ -1,9 +1,26 @@
+# Copyright 2021 resspect software
+# Author: Emille Ishida, Mi Dai
+#
+# created on 15 September 2021
+#
+# Licensed GNU General Public License v3.0;
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.gnu.org/licenses/gpl-3.0.en.html
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 from resspect.salt3_utils import get_distances
 
-import time
-import pandas as pd
 import numpy as np
-
+import os
+import pandas as pd
+import time
 
 #############################################################
 ########    Translate types SNANA/zendo    ##################
@@ -26,7 +43,7 @@ types_names = {90: 'Ia', 67: '91bg', 52:'Iax', 42:'II', 62:'Ibc',
 get_photoids = True
 
 # SALT2 fit is separated by class
-code_plasticc = 90
+code_plasticc = 52
 
 subsample = 'DDF'
 
@@ -34,21 +51,24 @@ subsample = 'DDF'
 version = 1
 
 # max number of light curves to fit per run
-chunck_size = 15000          
+chunck_size = 15000     
+
+# root directory for data
+root_dir = '/media2/RESSPECT2/clean_output/'
 
 # path to zenodo test metadata
 test_zenodo_meta = '/media/RESSPECT/data/PLAsTiCC/PLAsTiCC_zenodo/plasticc_test_metadata.csv'
 
 # path to photoids output directory
-photoids_dir = '/media/RESSPECT/data/PLAsTiCC/for_metrics/final_data/' + \
+photoids_dir = root_dir + '/' + \
                 subsample +'/SALT2_fit/' + types_names[code_plasticc] + '/photoids/'
 
 # path to fitres output directory
-fitres_dir = '/media/RESSPECT/data/PLAsTiCC/for_metrics/final_data/' + \
+fitres_dir = root_dir + '/' + \
                 subsample +'/SALT2_fit/' + types_names[code_plasticc] + '/fitres'
 
 # path to distances output directory
-fitres_dir = '/media/RESSPECT/data/PLAsTiCC/for_metrics/final_data/' + \
+distances_dir = root_dir + '/' + \
                 subsample +'/SALT2_fit/' + types_names[code_plasticc] + '/distances/'
 
 # path to PLAsTiCC SNANA files
@@ -60,6 +80,18 @@ SNANA_dir = '/media/RESSPECT/data/PLAsTiCC/SNANA/'
 restart_master = True
 
 ###############################################################
+
+# build directory infrastructure
+dir_list = [root_dir + subsample,
+            root_dir + subsample + '/SALT2_fit/',
+            root_dir + subsample + '/SALT2_fit/' +  types_names[code_plasticc],
+            photoids_dir,
+            fitres_dir,
+            distances_dir]
+
+for name in dir_list:
+    if not os.path.isdir(name):
+        os.makedirs(name)
 
 # translate names
 code_snana = SNANA_types[code_plasticc]
@@ -98,13 +130,11 @@ if get_photoids:
 
     # separate data in chuncks to avoid numerical problems
     i = 0
-    data_chuncks = {}
-
-    for start in range(0, data_out.shape[0], chunk_size):
+    for start in range(0, data_out.shape[0], chunck_size):
         i = i + 1
         
-        upper_lim = min(start + chunk_size, data_out.shape[0])
-        data_chuncks[i] = data_out.iloc[start:upper_lim]
+        upper_lim = min(start + chunck_size, data_out.shape[0])
+        subset = data_out.iloc[start:upper_lim]
     
         subset.to_csv(photoids_dir + '/' + sntype + '_' + subsample + \
                      '_photoids_plasticc_' + str(i) + '.dat', index=False)
@@ -135,7 +165,7 @@ res = get_distances(fname,
                      append_master_fitres=True,
                      restart_master_fitres=restart_master)
     
-res['distances'].to_csv(dist_dir + 'mu_' + sntype + '_' + subsample + \
+res['distances'].to_csv(distances_dir + 'mu_' + sntype + '_' + subsample + \
                         '_plasticc_' + str(version) + '.dat', index=False)
     
         
