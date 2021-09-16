@@ -1,0 +1,22 @@
+nohup: ignoring input
+*********  Fitting light curves   ******************
+0 modelnum = 11 sntype= Ia-SALT2
+Current procedures:  ['lcfit']
+Load base fit input file.. /media/emille/git/COIN/RESSPECT_repo/RESSPECT//auxiliary_files/baseinputs/perfect_sim_v1.nml
+Setting key VERSION_PHOTOMETRY=LSST_WFD_MODEL11 in &SNLCINP
+Addding key SNCID_LIST_FILE=results/WFD/salt3_Ia/snid/Ia_WFD_photoids_plasticc_5.dat_test_11 in &SNLCINP
+Setting key PRIVATE_DATA_PATH=/media/RESSPECT/data/PLAsTiCC/SNANA/ in &SNLCINP
+Setting key TEXTFILE_PREFIX=results/WFD/salt3_Ia/test_fitres_5_0 in &SNLCINP
+Write fit input to file: results/WFD/salt3_Ia/pipelineinputs/snfit_TEST.nml.temp.1631751466.8847542
+Running snlc_fit.exe /media/emille/git/COIN/RESSPECT_work/PLAsTiCC/metrics_paper/resspect_metric/clean_code/results/WFD/salt3_Ia/pipelineinputs/snfit_TEST.nml.temp.1631751466.8847542
+snlc_fit.exe finished successfully.
+Replacing zHD with SIM_ZCMB
+Current procedures:  ['getmu', 'cosmofit']
+Adding/modifying key file=results/WFD/salt3_Ia/test_fitres_combined.fitres
+Adding/modifying key prefix=results/WFD/salt3_Ia/test_salt2mu_res_5_combined
+input file saved as: results/WFD/salt3_Ia/pipelineinputs/test_salt2mu.input.temp.1631753102.377654
+Running SALT2mu.exe /media/emille/git/COIN/RESSPECT_work/PLAsTiCC/metrics_paper/resspect_metric/clean_code/results/WFD/salt3_Ia/pipelineinputs/test_salt2mu.input.temp.1631753102.377654
+SALT2mu.exe finished successfully.
+Running wfit.exe /media/emille/git/COIN/RESSPECT_work/PLAsTiCC/metrics_paper/resspect_metric/clean_code/results/WFD/salt3_Ia/test_salt2mu_res_5_combined.M0DIF -ompri 0.3 -dompri 0.01
+wfit.exe finished successfully.
+--- 1638.631754398346 seconds ---

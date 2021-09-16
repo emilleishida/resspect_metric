@@ -36,6 +36,11 @@ types_names = {90: 'Ia', 67: '91bg', 52:'Iax', 42:'II', 62:'Ibc',
                991:'MicroLB', 992:'ILOT', 993:'CART', 994:'PISN',
                995:'MLString'}
 
+# problematic light curves
+ignore = {}
+ignore['WFD'] = {}
+ignore['WFD']['II'] = [2898982]
+
 #############################################################
 ##########   User choices             #######################
 
@@ -43,12 +48,12 @@ types_names = {90: 'Ia', 67: '91bg', 52:'Iax', 42:'II', 62:'Ibc',
 get_photoids = True
 
 # SALT2 fit is separated by class
-code_plasticc = 52
+code_plasticc = 90
 
-subsample = 'DDF'
+subsample = 'WFD'
 
 # identification of photoids file
-version = 1
+version = 5
 
 # max number of light curves to fit per run
 chunck_size = 15000     
@@ -121,12 +126,24 @@ if get_photoids:
     data_new['id'] = snids
     data_new['redshift'] = redshifts
     data_new['type'] = [sntype for i in range(snids.shape[0])]
-    data_new['code'] = [code_snana for i in range(snids.shape[0])]
+    
+    if code_plasticc not in [42, 62, 6]:
+        data_new['code'] = [code_snana for i in range(snids.shape[0])]
+    else:
+        submodel = test_metadata[mask]['true_submodel'].values
+        data_new['code'] = [SNANA_types[code_plasticc][item] for item in submodel]
+        
     data_new['orig_sample'] = ['test' for i in range(snids.shape[0])]
     data_new['code_zenodo'] = [code_plasticc for i in range(snids.shape[0])]
         
-    data_out = pd.DataFrame(data_new)
-
+    data_out1 = pd.DataFrame(data_new)
+    
+    # remove problematic light curves
+    if sntype in ignore[subsample].keys():
+        flag = np.array([item in ignore[subsample] for item in data_out1['id'].values])
+        data_out = data_out1[flag]
+    else:
+        data_out = data_out1
 
     # separate data in chuncks to avoid numerical problems
     i = 0
@@ -163,7 +180,8 @@ res = get_distances(fname,
                      data_prefix_has_sntype=False,
                      master_fitres_name=fitres_dir + '/master_fitres_' + str(version) + '.fitres', 
                      append_master_fitres=True,
-                     restart_master_fitres=restart_master)
+                     restart_master_fitres=restart_master,
+                     outputdir='results/' + subsample + '/salt3_' + sntype)
     
 res['distances'].to_csv(distances_dir + 'mu_' + sntype + '_' + subsample + \
                         '_plasticc_' + str(version) + '.dat', index=False)

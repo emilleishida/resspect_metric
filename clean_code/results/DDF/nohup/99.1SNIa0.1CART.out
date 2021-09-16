@@ -1,0 +1,488 @@
+nohup: ignoring input
+
+	 Start program SALT2mu.exe 
+
+  Initialize NstringMatch for SALT2mu-input file
+Reading SALT2mu parameter-input file 'results/DDF/SALT2mu/SALT2mu_99.1SNIa0.9CART.input' : 
+ Parse 'bins=30' 
+ Parse 'zmin=0.001' 
+ Parse 'zmax=1.5' 
+ Parse 'x1min=-6.0' 
+ Parse 'x1max=6.0' 
+ Parse 'cmin=-6.0' 
+ Parse 'cmax=6.0' 
+ Parse 'p1=0.14' 
+ Parse 'p2=3.1' 
+ Parse 'p3=0.0' 
+ Parse 'p4=0.0' 
+ Parse 'p5=0.0' 
+ Parse 'p6=0.0' 
+ Parse 'p7=0.0' 
+ Parse 'p8=0.0' 
+ Parse 'p9=0.70' 
+ Parse 'p10=0.0' 
+ Parse 'p11=-1.0' 
+ Parse 'p12=0.0' 
+ Parse 'u1=0' 
+ Parse 'u2=0' 
+ Parse 'u3=0' 
+ Parse 'u4=0' 
+ Parse 'u5=0' 
+ Parse 'u6=0' 
+ Parse 'u7=0' 
+ Parse 'u8=0' 
+ Parse 'u9=0' 
+ Parse 'u10=0' 
+ Parse 'u11=0' 
+ Parse 'sig1=0.10' 
+ Parse 'sig2=0.0' 
+ Parse 'sig3=0.0' 
+ Parse 'xi01=0.0' 
+ Parse 'xi0c=0.0' 
+ Parse 'xi1c=0.0' 
+ Parse 'h0=70.0' 
+ Parse 'mag0=-29.7754' 
+ Parse 'uave=1' 
+ Parse 'file=/media2/RESSPECT2/clean_output/DDF/v0/fitres/master_fitres_99.1SNIa0.9CART_lowz_withbias.fitres' 
+ Parse 'prefix=/media2/RESSPECT2/clean_output/DDF/v0//test_salt2mu_lowz_withbias_99.1SNIa0.9CART' 
+
+
+ Parse command-line options: 
+  Initialize NstringMatch for SALT2mu command-line override
+ None found. Use all options from parameter-input file.
+zmin =0.001000 zmax =1.500000 bins=30 
+SN selection type=ALL
+x1min/x1max = -6.000 / 6.000 
+cmin/cmax   = -6.000 / 6.000 
+logmass_min/max = -20.000/20.000 
+H0=70.000000 
+Nominal M0=-29.775400 
+zpecerr(override)   = 0.00000 
+dsigint/dz(lensing) = 0.0000 
+Use average M0.
+uM0=1 --> M0 floated in each z bin. 
+blank  fixed   starting value=   0.000  (step=0.000)
+alpha0        fixed   starting value=   0.140  (step=0.010)
+beta0         fixed   starting value=   3.100  (step=0.300)
+alpha1        fixed   starting value=   0.000  (step=0.020)
+beta1         fixed   starting value=   0.000  (step=0.100)
+gamma0        fixed   starting value=   0.000  (step=0.010)
+gamma1        fixed   starting value=   0.000  (step=0.010)
+logmass_cen   fixed   starting value=   0.000  (step=0.100)
+logmass_tau   fixed   starting value=   0.000  (step=0.010)
+Omega_L       fixed   starting value=   0.700  (step=0.050)
+Omega_k       fixed   starting value=   0.000  (step=0.050)
+w0            fixed   starting value=  -1.000  (step=0.100)
+wa            fixed   starting value=   0.000  (step=0.500)
+scalePCC      fixed   starting value=   1.000  (step=0.050)
+sigint        fixed   starting value=   0.100  (step=0.010)
+alphaHost     fixed   starting value=   0.000  (step=0.020)
+betaHost      fixed   starting value=   0.000  (step=0.100)
+H11mucc0      fixed   starting value=   1.200  (step=0.100)
+H11mucc1      fixed   starting value=   3.000  (step=0.200)
+H11mucc2      fixed   starting value=  -2.000  (step=0.500)
+H11sigcc0     fixed   starting value=   0.300  (step=0.050)
+H11sigcc1     fixed   starting value=   0.000  (step=0.050)
+H11sigcc2     fixed   starting value=   0.000  (step=0.050)
+blank4        fixed   starting value=   0.000  (step=0.000)
+	 Append missing column(s) with substring = 'PROB'
+
+
+ ****************************************************************** 
+   read_data  
+	 Found 3213 events in /media2/RESSPECT2/clean_output/DDF/v0/fitres/master_fitres_99.1SNIa0.9CART_lowz_withbias.fitres. 
+	 malloc_INFO_DATA:  4.644 MB 
+   OPEN_TEXTFILE: /media2/RESSPECT2/clean_output/DDF/v0/fitres/master_fitres_99.1SNIa0.9CART_lowz_withbias.fitres 
+   Read 55 table varNames from TEXT table=FITRES 
+	 Prepare read-variable 'CID' (ivar=0, CAST=C) 
+	 Prepare read-variable 'IDSURVEY' (ivar=1, CAST=S) 
+	 Prepare read-variable 'TYPE' (ivar=2, CAST=S) 
+	 Prepare read-variable 'zHD' (ivar=9, CAST=F) 
+	 Prepare read-variable 'zHDERR' (ivar=10, CAST=F) 
+	 Prepare read-variable 'zCMB' (ivar=7, CAST=F) 
+	 Prepare read-variable 'zCMBERR' (ivar=8, CAST=F) 
+	 Prepare read-variable 'zHEL' (ivar=5, CAST=F) 
+	 Prepare read-variable 'zHELERR' (ivar=6, CAST=F) 
+	 Prepare read-variable 'VPEC' (ivar=11, CAST=F) 
+	 Prepare read-variable 'VPECERR' (ivar=12, CAST=F) 
+	 Prepare read-variable 'SNRMAX1' (ivar=19, CAST=F) 
+	 Prepare read-variable 'x0' (ivar=30, CAST=F) 
+	 Prepare read-variable 'x0ERR' (ivar=31, CAST=F) 
+	 Prepare read-variable 'x1' (ivar=24, CAST=F) 
+	 Prepare read-variable 'x1ERR' (ivar=25, CAST=F) 
+	 Prepare read-variable 'c' (ivar=26, CAST=F) 
+	 Prepare read-variable 'cERR' (ivar=27, CAST=F) 
+	 Prepare read-variable 'COV_x1_x0' (ivar=33, CAST=F) 
+	 Prepare read-variable 'COV_c_x0' (ivar=34, CAST=F) 
+	 Prepare read-variable 'COV_x1_c' (ivar=32, CAST=F) 
+	 Prepare read-variable 'SIM_TEMPLATE_INDEX' (ivar=39, CAST=S) 
+	 Prepare read-variable 'SIM_x0' (ivar=51, CAST=F) 
+	 Prepare read-variable 'SIM_mB' (ivar=52, CAST=F) 
+	 Prepare read-variable 'SIM_x1' (ivar=47, CAST=F) 
+	 Prepare read-variable 'SIM_c' (ivar=48, CAST=F) 
+	 Prepare read-variable 'SIM_alpha' (ivar=49, CAST=F) 
+	 Prepare read-variable 'SIM_beta' (ivar=50, CAST=F) 
+	 Prepare read-variable 'SIM_ZCMB' (ivar=42, CAST=F) 
+	 Prepare read-variable 'SIM_DLMAG' (ivar=45, CAST=F) 
+	 Prepare read-variable 'SIM_VPEC' (ivar=44, CAST=F) 
+	 ==> Finished reading 31 of 55 variables with 3213 entries
+
+ ****************************************************************** 
+   Begin check_duplicate_SNID  
+	 No duplicates found. 
+
+ check_vpec_sign with RMS(MURES) using N(0.010<z<0.050) = 210 events:
+	 RMS(MURES,nominal)   = 0.1335 
+	 RMS(MURES,flip-vpec) = 0.1981 
+
+ ****************************************************************** 
+   Begin setup_BININFO_powz   
+	 zbinsize ~ (1+z)^0.00 for z < 1.500 
+
+ -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+
+	 BEGIN FIT 
+
+ -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+
+ z= 0.00100 -  0.05097  NZBIN(TOT,CUTS)=   210,   210   ISFLOAT=1
+ z= 0.05097 -  0.10093  NZBIN(TOT,CUTS)=     5,     5   ISFLOAT=1
+ z= 0.10093 -  0.15090  NZBIN(TOT,CUTS)=     3,     3   ISFLOAT=1
+ z= 0.15090 -  0.20087  NZBIN(TOT,CUTS)=     6,     6   ISFLOAT=1
+ z= 0.20087 -  0.25083  NZBIN(TOT,CUTS)=     9,     9   ISFLOAT=1
+ z= 0.25083 -  0.30080  NZBIN(TOT,CUTS)=    18,    18   ISFLOAT=1
+ z= 0.30080 -  0.35077  NZBIN(TOT,CUTS)=    39,    39   ISFLOAT=1
+ z= 0.35077 -  0.40073  NZBIN(TOT,CUTS)=    59,    59   ISFLOAT=1
+ z= 0.40073 -  0.45070  NZBIN(TOT,CUTS)=    66,    66   ISFLOAT=1
+ z= 0.45070 -  0.50067  NZBIN(TOT,CUTS)=    88,    88   ISFLOAT=1
+ z= 0.50067 -  0.55063  NZBIN(TOT,CUTS)=   117,   117   ISFLOAT=1
+ z= 0.55063 -  0.60060  NZBIN(TOT,CUTS)=   121,   121   ISFLOAT=1
+ z= 0.60060 -  0.65057  NZBIN(TOT,CUTS)=   130,   130   ISFLOAT=1
+ z= 0.65057 -  0.70053  NZBIN(TOT,CUTS)=   158,   158   ISFLOAT=1
+ z= 0.70053 -  0.75050  NZBIN(TOT,CUTS)=   180,   180   ISFLOAT=1
+ z= 0.75050 -  0.80047  NZBIN(TOT,CUTS)=   176,   176   ISFLOAT=1
+ z= 0.80047 -  0.85043  NZBIN(TOT,CUTS)=   212,   212   ISFLOAT=1
+ z= 0.85043 -  0.90040  NZBIN(TOT,CUTS)=   223,   223   ISFLOAT=1
+ z= 0.90040 -  0.95037  NZBIN(TOT,CUTS)=   216,   216   ISFLOAT=1
+ z= 0.95037 -  1.00033  NZBIN(TOT,CUTS)=   212,   212   ISFLOAT=1
+ z= 1.00033 -  1.05030  NZBIN(TOT,CUTS)=   197,   197   ISFLOAT=1
+ z= 1.05030 -  1.10027  NZBIN(TOT,CUTS)=   195,   195   ISFLOAT=1
+ z= 1.10027 -  1.15023  NZBIN(TOT,CUTS)=   172,   172   ISFLOAT=1
+ z= 1.15023 -  1.20020  NZBIN(TOT,CUTS)=   104,   104   ISFLOAT=1
+ z= 1.20020 -  1.25017  NZBIN(TOT,CUTS)=   126,   126   ISFLOAT=1
+ z= 1.25017 -  1.30013  NZBIN(TOT,CUTS)=    68,    68   ISFLOAT=1
+ z= 1.30013 -  1.35010  NZBIN(TOT,CUTS)=    45,    45   ISFLOAT=1
+ z= 1.35010 -  1.40007  NZBIN(TOT,CUTS)=    36,    36   ISFLOAT=1
+ z= 1.40007 -  1.45003  NZBIN(TOT,CUTS)=    20,    20   ISFLOAT=1
+ z= 1.45003 -  1.50000  NZBIN(TOT,CUTS)=     2,     2   ISFLOAT=1
+ --> Use 30 of 30 z-bins in fit.
+  MINUIT RELEASE 96.03  INITIALIZED.   DIMENSIONS 100/110  EPSMAC=  0.89E-15
+ MINUIT WARNING IN PARAM DEF
+ ============== STARTING VALUE OUTSIDE LIMITS.
+ MINUIT WARNING IN PARAMETR
+ ============== VARIABLE   8 BROUGHT BACK INSIDE LIMITS.  
+ MINUIT WARNING IN PARAMETR
+ ============== VARIABLE   8 BROUGHT BACK INSIDE LIMITS.  
+ MINUIT WARNING IN PARAM DEF
+ ============== STARTING VALUE OUTSIDE LIMITS.
+ MINUIT WARNING IN PARAMETR
+ ============== VARIABLE   9 BROUGHT BACK INSIDE LIMITS.  
+ MINUIT WARNING IN PARAMETR
+ ============== VARIABLE   9 BROUGHT BACK INSIDE LIMITS.  
+
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+ DATA STAT SUMMARY: 3213(TOTAL) = 3213(ACCEPT) + 0(REJECT) 
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+
+**********Fit summary**************
+MNFIT status=3 (Good fit; errors valid)
+-2lnL/dof = 5202.75/3183 =  1.635 (3213 SN) 
+
+Final parameter values and MINOS errors.
+par  0      blank       0.0000         fixed
+par  1      alpha0      0.1400         fixed
+par  2      beta0       3.1000         fixed
+par  3      alpha1      0.0000         fixed
+par  4      beta1       0.0000         fixed
+par  5      gamma0      0.0000         fixed
+par  6      gamma1      0.0000         fixed
+par  7      logmass_ce  0.0000         fixed
+par  8      logmass_ta  0.0000         fixed
+par  9      Omega_L     0.7000         fixed
+par 10      Omega_k     0.0000         fixed
+par 11      w0         -1.0000         fixed
+par 12      wa          0.0000         fixed
+par 13      scalePCC    1.0000         fixed
+par 14      sigint      0.1000         fixed
+par 15      alphaHost   0.0000         fixed
+par 16      betaHost    0.0000         fixed
+par 17      H11mucc0    1.2000         fixed
+par 18      H11mucc1    3.0000         fixed
+par 19      H11mucc2   -2.0000         fixed
+par 20      H11sigcc0   0.3000         fixed
+par 21      H11sigcc1   0.0000         fixed
+par 22      H11sigcc2   0.0000         fixed
+par 23      blank4      0.0000         fixed
+par 24 ( 1) m0_00      -3.0032e+01 +/- 7.4849e-03 MINOS (+)7.4849e-03 (-)-7.4849e-03  Global CC= 0.000 
+par 25 ( 2) m0_01      -3.0124e+01 +/- 5.3651e-02 MINOS (+)5.3652e-02 (-)-5.3649e-02  Global CC= 0.000 
+par 26 ( 3) m0_02      -2.9992e+01 +/- 6.5407e-02 MINOS (+)6.5405e-02 (-)-6.5409e-02  Global CC= 0.000 
+par 27 ( 4) m0_03      -3.0046e+01 +/- 5.3136e-02 MINOS (+)5.3137e-02 (-)-5.3134e-02  Global CC= 0.000 
+par 28 ( 5) m0_04      -3.0006e+01 +/- 4.1899e-02 MINOS (+)4.1898e-02 (-)-4.1899e-02  Global CC= 0.000 
+par 29 ( 6) m0_05      -2.9842e+01 +/- 2.9253e-02 MINOS (+)2.9253e-02 (-)-2.9253e-02  Global CC= 0.000 
+par 30 ( 7) m0_06      -2.9972e+01 +/- 2.0695e-02 MINOS (+)2.0695e-02 (-)-2.0694e-02  Global CC= 0.000 
+par 31 ( 8) m0_07      -2.9967e+01 +/- 1.5593e-02 MINOS (+)1.5593e-02 (-)-1.5593e-02  Global CC= 0.000 
+par 32 ( 9) m0_08      -3.0009e+01 +/- 1.5013e-02 MINOS (+)1.5012e-02 (-)-1.5013e-02  Global CC= 0.000 
+par 33 (10) m0_09      -3.0023e+01 +/- 1.2900e-02 MINOS (+)1.2900e-02 (-)-1.2900e-02  Global CC= 0.000 
+par 34 (11) m0_10      -3.0000e+01 +/- 1.1816e-02 MINOS (+)1.1816e-02 (-)-1.1816e-02  Global CC= 0.000 
+par 35 (12) m0_11      -3.0009e+01 +/- 1.2515e-02 MINOS (+)1.2516e-02 (-)-1.2515e-02  Global CC= 0.000 
+par 36 (13) m0_12      -3.0027e+01 +/- 1.2944e-02 MINOS (+)1.2943e-02 (-)-1.2944e-02  Global CC= 0.000 
+par 37 (14) m0_13      -2.9993e+01 +/- 1.1969e-02 MINOS (+)1.1969e-02 (-)-1.1969e-02  Global CC= 0.000 
+par 38 (15) m0_14      -2.9989e+01 +/- 1.2004e-02 MINOS (+)1.2004e-02 (-)-1.2004e-02  Global CC= 0.000 
+par 39 (16) m0_15      -3.0020e+01 +/- 1.2428e-02 MINOS (+)1.2428e-02 (-)-1.2428e-02  Global CC= 0.000 
+par 40 (17) m0_16      -3.0021e+01 +/- 1.1922e-02 MINOS (+)1.1921e-02 (-)-1.1922e-02  Global CC= 0.000 
+par 41 (18) m0_17      -3.0037e+01 +/- 1.1957e-02 MINOS (+)1.1957e-02 (-)-1.1957e-02  Global CC= 0.000 
+par 42 (19) m0_18      -3.0030e+01 +/- 1.3415e-02 MINOS (+)1.3416e-02 (-)-1.3414e-02  Global CC= 0.000 
+par 43 (20) m0_19      -3.0006e+01 +/- 1.3742e-02 MINOS (+)1.3743e-02 (-)-1.3742e-02  Global CC= 0.000 
+par 44 (21) m0_20      -3.0054e+01 +/- 1.9290e-02 MINOS (+)1.9292e-02 (-)-1.9288e-02  Global CC= 0.000 
+par 45 (22) m0_21      -3.0037e+01 +/- 2.0782e-02 MINOS (+)2.0783e-02 (-)-2.0780e-02  Global CC= 0.000 
+par 46 (23) m0_22      -3.0007e+01 +/- 2.2988e-02 MINOS (+)2.2990e-02 (-)-2.2987e-02  Global CC= 0.000 
+par 47 (24) m0_23      -3.0044e+01 +/- 3.1776e-02 MINOS (+)3.1778e-02 (-)-3.1774e-02  Global CC= 0.000 
+par 48 (25) m0_24      -3.0020e+01 +/- 3.1181e-02 MINOS (+)3.1181e-02 (-)-3.1180e-02  Global CC= 0.000 
+par 49 (26) m0_25      -3.0093e+01 +/- 4.6051e-02 MINOS (+)4.6051e-02 (-)-4.6051e-02  Global CC= 0.000 
+par 50 (27) m0_26      -3.0094e+01 +/- 5.4322e-02 MINOS (+)5.4282e-02 (-)-5.4361e-02  Global CC= 0.000 
+par 51 (28) m0_27      -3.0002e+01 +/- 6.0493e-02 MINOS (+)6.0494e-02 (-)-6.0492e-02  Global CC= 0.000 
+par 52 (29) m0_28      -3.0157e+01 +/- 9.1512e-02 MINOS (+)9.1515e-02 (-)-9.1510e-02  Global CC= 0.000 
+par 53 (30) m0_29      -3.0241e+01 +/- 4.4690e-01 MINOS (+)4.4691e-01 (-)-4.4689e-01  Global CC= 0.000 
+Average mag0 offset = -30.021876  (wgted by NSN per z bin)
+
+# Reduced COV matrix:
+# m0_00       1.000 
+# m0_01       0.000  1.000 
+# m0_02      -0.000 -0.000  1.000 
+# m0_03      -0.000 -0.000 -0.000  1.000 
+# m0_04      -0.000 -0.000 -0.000 -0.000  1.000 
+# m0_05      -0.000 -0.000  0.000 -0.000 -0.000  1.000 
+# m0_06      -0.000 -0.000  0.000 -0.000 -0.000  0.000  1.000 
+# m0_07       0.000  0.000 -0.000 -0.000 -0.000  0.000  0.000  1.000 
+# m0_08      -0.000 -0.000 -0.000 -0.000  0.000  0.000  0.000 -0.000  1.000 
+# m0_09      -0.000 -0.000  0.000 -0.000 -0.000  0.000  0.000  0.000  0.000  1.000 
+# m0_10      -0.000 -0.000 -0.000 -0.000  0.000  0.000  0.000 -0.000  0.000  0.000  1.000 
+# m0_11       0.000  0.000 -0.000  0.000 -0.000 -0.000 -0.000  0.000 -0.000 -0.000 -0.000  1.000 
+# m0_12       0.000  0.000  0.000  0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000  0.000  1.000 
+# m0_13      -0.000 -0.000 -0.000 -0.000 -0.000  0.000  0.000 -0.000  0.000 -0.000  0.000 -0.000 -0.000  1.000 
+# m0_14       0.000  0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000  0.000  0.000 -0.000  1.000 
+# m0_15       0.000  0.000  0.000  0.000 -0.000 -0.000 -0.000  0.000 -0.000 -0.000 -0.000  0.000  0.000 -0.000  0.000  1.000 
+# m0_16       0.000  0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000  0.000  0.000 -0.000  0.000  0.000  1.000 
+# m0_17      -0.000 -0.000 -0.000  0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000  0.000  0.000 -0.000 -0.000  0.000 -0.000  1.000 
+# m0_18      -0.000 -0.000  0.000 -0.000 -0.000  0.000 -0.000  0.000  0.000  0.000  0.000 -0.000 -0.000  0.000 -0.000 -0.000 -0.000 -0.000  1.000 
+# m0_19      -0.000 -0.000 -0.000 -0.000  0.000 -0.000 -0.000 -0.000 -0.000 -0.000  0.000  0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000  1.000 
+# m0_20       0.000  0.000  0.000  0.000 -0.000 -0.000 -0.000  0.000 -0.000 -0.000 -0.000  0.000  0.000 -0.000  0.000  0.000  0.000  0.000 -0.000 -0.000  1.000 
+# m0_21       0.000  0.000  0.000  0.000 -0.000 -0.000 -0.000  0.000 -0.000 -0.000 -0.000  0.000  0.000 -0.000  0.000  0.000  0.000 -0.000 -0.000 -0.000  0.000  1.000 
+# m0_22       0.000  0.000  0.000  0.000 -0.000 -0.000 -0.000  0.000 -0.000 -0.000 -0.000  0.000  0.000 -0.000  0.000  0.000  0.000 -0.000 -0.000 -0.000  0.000  0.000  1.000 
+# m0_23      -0.000 -0.000 -0.000 -0.000 -0.000  0.000  0.000 -0.000 -0.000  0.000 -0.000 -0.000  0.000 -0.000 -0.000  0.000 -0.000 -0.000  0.000 -0.000  0.000  0.000  0.000  1.000 
+# m0_24      -0.000 -0.000  0.000 -0.000 -0.000  0.000 -0.000  0.000  0.000  0.000  0.000 -0.000 -0.000  0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000  0.000  1.000 
+# m0_25      -0.000 -0.000 -0.000 -0.000 -0.000  0.000  0.000 -0.000 -0.000  0.000 -0.000  0.000 -0.000  0.000 -0.000 -0.000 -0.000 -0.000  0.000 -0.000 -0.000  0.000 -0.000 -0.000  0.000  1.000 
+# m0_26       0.000  0.000  0.000 -0.000 -0.000 -0.000 -0.000  0.000 -0.000 -0.000 -0.000  0.000  0.000 -0.000  0.000  0.000  0.000  0.000 -0.000 -0.000  0.000  0.000  0.000  0.000 -0.000 -0.000  1.000 
+# m0_27      -0.000 -0.000 -0.000 -0.000  0.000 -0.000 -0.000 -0.000  0.000 -0.000  0.000 -0.000 -0.000  0.000 -0.000 -0.000 -0.000 -0.000 -0.000  0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000 -0.000  1.000 
+# m0_28      -0.000 -0.000 -0.000 -0.000 -0.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000 -0.000  0.000 -0.000 -0.000 -0.000 -0.000  0.000  0.000 -0.000  0.000 -0.000 -0.000  0.000  0.000 -0.000  0.000  1.000 
+# m0_29      -0.000 -0.000 -0.000 -0.000  0.000  0.000  0.000 -0.000  0.000  0.000  0.000 -0.000 -0.000  0.000 -0.000 -0.000 -0.000 -0.000  0.000  0.000 -0.000 -0.000 -0.000 -0.000  0.000 -0.000 -0.000  0.000  0.000  1.000 
+#
+
+
+  muerr_renorm: compute MUERR_RENORM to preserve M0DIF wgt per z bin
+	 iz= 0  <z>=0.026  muerr *= 1.000  [MURES check = -0.0000 ]
+	 iz= 1  <z>=0.076  muerr *= 1.000  [MURES check =  0.0000 ]
+	 iz= 2  <z>=0.126  muerr *= 1.000  [MURES check = -0.0000 ]
+	 iz= 3  <z>=0.176  muerr *= 1.000  [MURES check =  0.0000 ]
+	 iz= 4  <z>=0.226  muerr *= 1.000  [MURES check = -0.0000 ]
+	 iz= 5  <z>=0.276  muerr *= 1.000  [MURES check = -0.0000 ]
+	 iz= 6  <z>=0.326  muerr *= 1.000  [MURES check =  0.0000 ]
+	 iz= 7  <z>=0.376  muerr *= 1.000  [MURES check = -0.0000 ]
+	 iz= 8  <z>=0.426  muerr *= 1.000  [MURES check = -0.0000 ]
+	 iz= 9  <z>=0.476  muerr *= 1.000  [MURES check =  0.0000 ]
+	 iz=10  <z>=0.526  muerr *= 1.000  [MURES check =  0.0000 ]
+	 iz=11  <z>=0.576  muerr *= 1.000  [MURES check =  0.0000 ]
+	 iz=12  <z>=0.626  muerr *= 1.000  [MURES check = -0.0000 ]
+	 iz=13  <z>=0.676  muerr *= 1.000  [MURES check =  0.0000 ]
+	 iz=14  <z>=0.726  muerr *= 1.000  [MURES check = -0.0000 ]
+	 iz=15  <z>=0.775  muerr *= 1.000  [MURES check =  0.0000 ]
+	 iz=16  <z>=0.825  muerr *= 1.000  [MURES check = -0.0000 ]
+	 iz=17  <z>=0.875  muerr *= 1.000  [MURES check =  0.0000 ]
+	 iz=18  <z>=0.925  muerr *= 1.000  [MURES check =  0.0000 ]
+	 iz=19  <z>=0.975  muerr *= 1.000  [MURES check =  0.0000 ]
+	 iz=20  <z>=1.025  muerr *= 1.000  [MURES check =  0.0000 ]
+	 iz=21  <z>=1.075  muerr *= 1.000  [MURES check =  0.0000 ]
+	 iz=22  <z>=1.125  muerr *= 1.000  [MURES check =  0.0000 ]
+	 iz=23  <z>=1.175  muerr *= 1.000  [MURES check =  0.0000 ]
+	 iz=24  <z>=1.225  muerr *= 1.000  [MURES check =  0.0000 ]
+	 iz=25  <z>=1.275  muerr *= 1.000  [MURES check =  0.0000 ]
+	 iz=26  <z>=1.325  muerr *= 1.000  [MURES check = -0.0000 ]
+	 iz=27  <z>=1.375  muerr *= 1.000  [MURES check =  0.0000 ]
+	 iz=28  <z>=1.425  muerr *= 1.000  [MURES check =  0.0000 ]
+	 iz=29  <z>=1.475  muerr *= 1.000  [MURES check =  0.0000 ]
+
+ Open output file with  cutmask_write=0 : 
+	 /media2/RESSPECT2/clean_output/DDF/v0//test_salt2mu_lowz_withbias_99.1SNIa0.9CART.fitres 
+ Wrote 3213 SN  (3213/3213 used in fit) 
+
+ Write MUDIF vs. redshift to /media2/RESSPECT2/clean_output/DDF/v0//test_salt2mu_lowz_withbias_99.1SNIa0.9CART.M0DIF
+
+ Write COV_stat matrix to /media2/RESSPECT2/clean_output/DDF/v0//test_salt2mu_lowz_withbias_99.1SNIa0.9CART.COV
+
+ PROCESS-TIME SUMMARY: 
+   Ini-time:  0.00 minutes 
+   Fit-time:  0.17 minutes 
+
+
+ Done. 
+ Full command: 
+    wfit.exe test_salt2mu_lowz_withbias_99.1SNIa0.9CART.M0DIF -ompri 0.3 -dompri 0.01 -hmin 70 -hmax 70 -hsteps 1 -wmin -10 -wmax 9 -ommin 0.29 -ommax 0.31
+
+ =============================================== 
+ SNANA_DIR = /media/SNANA/SNANA_new/SNANA/ 
+ Open fitres file: test_salt2mu_lowz_withbias_99.1SNIa0.9CART.M0DIF 
+	 Opened : test_salt2mu_lowz_withbias_99.1SNIa0.9CART.M0DIF 
+
+ !!! Found MUDIF --> fit for w-wref and OM-OMref 
+
+ Read 30 SNe from test_salt2mu_lowz_withbias_99.1SNIa0.9CART.M0DIF 
+ Select 30 SNe for fitting.
+ MUERR_INCLUDE(zERR,LENS) = 1, 0 
+ Done reading file -- NCIDLIST: 30, NSNE_NBIN: 0 
+   --------   Grid parameters   -------- 
+   w_min: -10.00   w_max:   9.00    201 steps of size  0.09500
+ omm_min:   0.29 omm_max:   0.31     81 steps of size  0.00025
+   h_min:  70.00   h_max:  70.00      1 steps of size     -nan
+Fitting data with Omega_m prior: 0.300 +/- 0.010
+Will MINIMIZE for final w & OM 
+Add 0.00 mag-error (snrms) in quadrature to MU-error 
+   Minimize with refined wstep=0.0095 (80 bins, wcen=-1.0700) 
+   Minimize with refined OMstep=0.0000 (80 bins, OMcen=0.3100) 
+Marginalizing over omega_m...
+  CHECK:  w(marg) = -1.056260  w(minchi2=  85.15) = -1.060500
+marg werr estimate = 0.033418
+WARNING: grid is too coarse to resolve upper 1-sigma limit
+probwerr estimates: lower = 0.108740, upper = 0.095000
+marg ommerr estimate = 0.004223
+Write cosmo params to test_salt2mu_lowz_withbias_99.1SNIa0.9CART.M0DIF.cospar 
+DONE. 
+INFO:pystan:COMPILING THE C++ CODE FOR MODEL anon_model_725111fdd815e012938cfa2e02faa026 NOW.
+
+Gradient evaluation took 0.005786 seconds
+1000 transitions using 10 leapfrog steps per transition would take 57.86 seconds.
+Adjust your expectations accordingly!
+
+
+Iteration:     1 / 12000 [  0%]  (Warmup)
+
+Gradient evaluation took 0.003763 seconds
+1000 transitions using 10 leapfrog steps per transition would take 37.63 seconds.
+Adjust your expectations accordingly!
+
+
+Iteration:     1 / 12000 [  0%]  (Warmup)
+
+Gradient evaluation took 0.003567 seconds
+1000 transitions using 10 leapfrog steps per transition would take 35.67 seconds.
+Adjust your expectations accordingly!
+
+
+Iteration:     1 / 12000 [  0%]  (Warmup)
+
+Gradient evaluation took 0.00374 seconds
+1000 transitions using 10 leapfrog steps per transition would take 37.4 seconds.
+Adjust your expectations accordingly!
+
+
+Iteration:     1 / 12000 [  0%]  (Warmup)
+
+Gradient evaluation took 0.004137 seconds
+1000 transitions using 10 leapfrog steps per transition would take 41.37 seconds.
+Adjust your expectations accordingly!
+
+
+Iteration:     1 / 12000 [  0%]  (Warmup)
+Iteration:  1200 / 12000 [ 10%]  (Warmup)
+Iteration:  1200 / 12000 [ 10%]  (Warmup)
+Iteration:  1200 / 12000 [ 10%]  (Warmup)
+Iteration:  2400 / 12000 [ 20%]  (Warmup)
+Iteration:  2400 / 12000 [ 20%]  (Warmup)
+Iteration:  2400 / 12000 [ 20%]  (Warmup)
+Iteration:  3600 / 12000 [ 30%]  (Warmup)
+Iteration:  3600 / 12000 [ 30%]  (Warmup)
+Iteration:  3600 / 12000 [ 30%]  (Warmup)
+Iteration:  4800 / 12000 [ 40%]  (Warmup)
+Iteration:  4800 / 12000 [ 40%]  (Warmup)
+Iteration:  4800 / 12000 [ 40%]  (Warmup)
+Iteration:  1200 / 12000 [ 10%]  (Warmup)
+Iteration:  6000 / 12000 [ 50%]  (Warmup)
+Iteration:  6000 / 12000 [ 50%]  (Warmup)
+Iteration:  6000 / 12000 [ 50%]  (Warmup)
+Iteration:  1200 / 12000 [ 10%]  (Warmup)
+Iteration:  7200 / 12000 [ 60%]  (Warmup)
+Iteration:  7200 / 12000 [ 60%]  (Warmup)
+Iteration:  2400 / 12000 [ 20%]  (Warmup)
+Iteration:  7200 / 12000 [ 60%]  (Warmup)
+Iteration:  2400 / 12000 [ 20%]  (Warmup)
+Iteration:  8400 / 12000 [ 70%]  (Warmup)
+Iteration:  8400 / 12000 [ 70%]  (Warmup)
+Iteration:  8400 / 12000 [ 70%]  (Warmup)
+Iteration:  3600 / 12000 [ 30%]  (Warmup)
+Iteration:  3600 / 12000 [ 30%]  (Warmup)
+Iteration:  9600 / 12000 [ 80%]  (Warmup)
+Iteration:  9600 / 12000 [ 80%]  (Warmup)
+Iteration: 10001 / 12000 [ 83%]  (Sampling)
+Iteration: 10001 / 12000 [ 83%]  (Sampling)
+Iteration:  9600 / 12000 [ 80%]  (Warmup)
+Iteration:  4800 / 12000 [ 40%]  (Warmup)
+Iteration:  4800 / 12000 [ 40%]  (Warmup)
+Iteration: 10001 / 12000 [ 83%]  (Sampling)
+Iteration: 11200 / 12000 [ 93%]  (Sampling)
+Iteration:  6000 / 12000 [ 50%]  (Warmup)
+Iteration:  6000 / 12000 [ 50%]  (Warmup)
+Iteration: 11200 / 12000 [ 93%]  (Sampling)
+Iteration: 11200 / 12000 [ 93%]  (Sampling)
+Iteration: 12000 / 12000 [100%]  (Sampling)
+
+ Elapsed Time: 362.156 seconds (Warm-up)
+               38.0373 seconds (Sampling)
+               400.193 seconds (Total)
+
+Iteration:  7200 / 12000 [ 60%]  (Warmup)
+Iteration: 12000 / 12000 [100%]  (Sampling)
+
+ Elapsed Time: 358.95 seconds (Warm-up)
+               49.3538 seconds (Sampling)
+               408.304 seconds (Total)
+
+Iteration:  7200 / 12000 [ 60%]  (Warmup)
+Iteration: 12000 / 12000 [100%]  (Sampling)
+
+ Elapsed Time: 372.122 seconds (Warm-up)
+               44.4833 seconds (Sampling)
+               416.605 seconds (Total)
+
+Iteration:  8400 / 12000 [ 70%]  (Warmup)
+Iteration:  8400 / 12000 [ 70%]  (Warmup)
+Iteration:  9600 / 12000 [ 80%]  (Warmup)
+Iteration:  9600 / 12000 [ 80%]  (Warmup)
+Iteration: 10001 / 12000 [ 83%]  (Sampling)
+Iteration: 10001 / 12000 [ 83%]  (Sampling)
+Iteration: 11200 / 12000 [ 93%]  (Sampling)
+Iteration: 11200 / 12000 [ 93%]  (Sampling)
+Iteration: 12000 / 12000 [100%]  (Sampling)
+
+ Elapsed Time: 457.853 seconds (Warm-up)
+               27.7694 seconds (Sampling)
+               485.623 seconds (Total)
+
+Iteration: 12000 / 12000 [100%]  (Sampling)
+
+ Elapsed Time: 458 seconds (Warm-up)
+               39.6604 seconds (Sampling)
+               497.66 seconds (Total)
+
+WARNING:pystan:Maximum (flat) parameter count (1000) exceeded: skipping diagnostic tests for n_eff and Rhat.
+To run all diagnostics call pystan.check_hmc_diagnostics(fit)
+WARNING:pystan:n_eff / iter below 0.001 indicates that the effective sample size has likely been overestimated
