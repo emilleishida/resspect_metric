@@ -2,3 +2,5 @@ clean_code/results/*
 clean_code/None/
 SALT2_fit/*
 posteriors/*
+clean_code/.ipynb_checkpoints/01_SALT2_fit-checkpoint.py
+clean_code/plots/.ipynb_checkpoints/
