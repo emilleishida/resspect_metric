@@ -27,7 +27,7 @@ types_names = {90: 'Ia', 67: '91bg', 52:'Iax', 42:'II', 62:'Ibc',
 get_photoids = True
 
 # SALT2 fit is separated by class
-code_plasticc = 64
+code_plasticc = 67
 subtype = 1
 
 subsample = 'DDF'

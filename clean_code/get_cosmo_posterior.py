@@ -315,13 +315,13 @@ def fit_stan(fname_fitres_comb: str, dir_output: str, sample: str,
 
 ##################    user choices     ##########################################
 #sample = '83SNIa17SNII'                        # choose sample case
-nobjs = '6000'
+nobjs = '3000'
 nbins = 30                                    # number of bins for SALT2mu
 om_pri = [0.3, 0.01]                          # gaussian prior on om => [mean, std]
 w_pri = [-10, 9]                              # flat prior on w
 lowz = True                                   # choose to add lowz sample
 field = 'WFD'                                 # choose field
-version = '0'                                 # realization or version
+version = '2'                                 # realization or version
 biascorr = True
 screen = True
 
@@ -355,7 +355,9 @@ samples_dir = '/media/RESSPECT/data/PLAsTiCC/for_metrics/final_data3/' + field +
 # read samples
 samples_list = os.listdir(samples_dir)
 
-done = ['fiducial6000.csv']
+#done = ['random3000.csv', 'fiducial3000.csv', '99SNIa1SNIax.csv', 
+#        '98SNIa2SNIax.csv', '95SNIa5SNIax.csv', '90SNIa10SNIax.csv',  '99.9SNIa0.1SNIax.csv']
+done = ['random' + nobjs +'.csv', 'fiducial' + nobjs +'.csv', 'perfect' + nobjs + '.csv']
 
 for name in samples_list:
     if name in done:
